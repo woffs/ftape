@@ -27,7 +27,6 @@
 #include <linux/config.h>
 #include <linux/errno.h>
 #include <linux/jiffies.h>
-#include <asm/system.h>
 #include <asm/io.h>
 #if defined(__alpha__)
 # include <asm/hwrpb.h>
@@ -76,9 +75,7 @@ unsigned int ftape_timestamp(void)
 	asm volatile ("rpcc %0" : "=r" (r));
 	return r;
 #elif defined(__x86_64__)
-	unsigned long r;
-	rdtscl(r);
-	return r;
+	return rdtsc();
 #elif defined(__i386__)
 
 /*

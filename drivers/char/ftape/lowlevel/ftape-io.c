@@ -29,7 +29,7 @@
 #include <linux/errno.h>
 #include <linux/sched.h>
 #include <linux/mm.h>
-#include <asm/system.h>
+#include <linux/sched/signal.h>
 #include <linux/ioctl.h>
 #include <linux/mtio.h>
 #include <linux/delay.h>

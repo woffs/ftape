@@ -127,10 +127,10 @@ module_param(ft_fdc_threshold,  uint, 0);
 MODULE_PARM_DESC(ft_fdc_threshold,  "Threshold of the FDC Fifo.");
 module_param(ft_fdc_rate_limit, uint, 0);
 MODULE_PARM_DESC(ft_fdc_rate_limit, "Maximal data rate for FDC.");
-module_param(ft_probe_fc10,     bool, 0);
+module_param(ft_probe_fc10,     int, 0);
 MODULE_PARM_DESC(ft_probe_fc10,
 	    "If non-zero, probe for a Colorado FC-10/FC-20 controller.");
-module_param(ft_mach2,          bool, 0);
+module_param(ft_mach2,          int, 0);
 MODULE_PARM_DESC(ft_mach2,
 	    "If non-zero, probe for a Mountain MACH-2 controller.");
 #if defined(MODULE) && !defined(CONFIG_FT_NO_TRACE_AT_ALL)

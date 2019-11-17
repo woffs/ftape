@@ -32,7 +32,8 @@
 #include <linux/ioport.h>
 #include <linux/interrupt.h>
 #include <linux/kernel.h>
-#include <asm/system.h>
+#include <linux/delay.h>
+#include <linux/sched/signal.h>
 #include <asm/io.h>
 #include <asm/dma.h>
 #include <asm/irq.h>
@@ -1327,7 +1328,7 @@ static int fdc_grab_irq_and_dma(void)
 		 *  MB: Replaced deprecated flag 'SA_INTERRUPT'
 		 */
 		if (request_irq(fdc.irq, ftape_interrupt,
-				IRQF_DISABLED, "ft", ftape_id)) {
+				0x0, "ft", ftape_id)) {
 			TRACE_ABORT(-EIO, ft_t_bug,
 				    "Unable to grab IRQ%d for ftape driver",
 				    fdc.irq);

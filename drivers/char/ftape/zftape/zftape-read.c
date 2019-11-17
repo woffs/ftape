@@ -28,6 +28,7 @@
 #include <linux/mm.h>
 
 #include <linux/zftape.h>
+#include <linux/uaccess.h>
 
 #include <asm/uaccess.h>
 

@@ -32,7 +32,6 @@
 #include <linux/kmod.h>
 #endif
 #include <linux/fcntl.h>
-#include <linux/smp_lock.h>
 /* #include <linux/devfs_fs_kernel.h> */
 
 #include <linux/zftape.h>
@@ -185,7 +184,7 @@ static int zft_ioctl(struct inode *ino, struct file *filep,
 static long zft_ioctl_new(struct file *filep,
 			  unsigned int command, unsigned long arg)
 {
-	struct inode *ino = filep->f_dentry->d_inode;
+	struct inode *ino = filep->f_inode;
         return (long) zft_ioctl(ino, filep, command, arg);
 }
 
@@ -198,7 +197,7 @@ static int  zft_mmap(struct file *filep, struct vm_area_struct *vma)
 	TRACE_FUN(ft_t_flow);
 
 	if ( !test_bit(0,&busy_flag) || 
-	    iminor(filep->f_dentry->d_inode) != zft_unit || 
+	    iminor(filep->f_inode) != zft_unit || 
 	    ft_failure)
 	{
 		TRACE_ABORT(-EIO, ft_t_err,
@@ -223,7 +222,7 @@ static ssize_t zft_read(struct file *fp, char __user *buff,
 {
 	int result = -EIO;
 	sigset_t old_sigmask;
-	struct inode *ino = fp->f_dentry->d_inode;
+	struct inode *ino = fp->f_inode;
 	TRACE_FUN(ft_t_flow);
 
 	TRACE(ft_t_data_flow, "called with count: %ld", (unsigned long)req_len);
@@ -246,7 +245,7 @@ static ssize_t zft_write(struct file *fp, const char __user *buff,
 {
 	int result = -EIO;
 	sigset_t old_sigmask;
-	struct inode *ino = fp->f_dentry->d_inode;
+	struct inode *ino = fp->f_inode;
 	TRACE_FUN(ft_t_flow);
 
 	TRACE(ft_t_flow, "called with count: %ld", (unsigned long)req_len);

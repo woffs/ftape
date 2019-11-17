@@ -29,6 +29,7 @@
 #include <linux/mm.h>
 #include <linux/module.h>
 #include <linux/fcntl.h>
+#include <linux/uaccess.h>
 
 #include <linux/zftape.h>
 
